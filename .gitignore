@@ -1,0 +1,37 @@
+# Node modules
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# Build output
+dist/
+build/
+backend/dist/
+frontend/dist/
+
+# SQLite database
+*.db
+backend/*.db
+
+# Logs
+*.log
+backend/*.log
+frontend/*.log
+
+# Environment variables
+.env
+backend/.env
+frontend/.env
+
+# Jest coverage
+coverage/
+backend/coverage/
+frontend/coverage/
+
+# IDE files
+.vscode/
+.idea/
+.DS_Store
+
+# OS files
+Thumbs.db

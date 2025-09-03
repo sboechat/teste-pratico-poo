@@ -1,0 +1,106 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Gestão de Tarefas",
+    "version": "1.0.0",
+    "description": "Documentação da API de gestão de tarefas."
+  },
+  "paths": {
+    "/tarefas": {
+      "post": {
+        "summary": "Criar uma nova tarefa",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "titulo": { "type": "string" },
+                  "descricao": { "type": "string" },
+                  "status": { "type": "string", "enum": ["pendente", "em andamento", "concluída"] }
+                },
+                "required": ["titulo", "descricao", "status"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Tarefa criada" },
+          "400": { "description": "Campos obrigatórios ausentes" }
+        }
+      },
+      "get": {
+        "summary": "Listar todas as tarefas",
+        "responses": {
+          "200": { "description": "Lista de tarefas" }
+        }
+      }
+    },
+    "/tarefas/status": {
+      "get": {
+        "summary": "Filtrar tarefas por status",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string", "enum": ["pendente", "em andamento", "concluída"] }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Lista de tarefas filtradas" },
+          "400": { "description": "Status não informado" }
+        }
+      }
+    },
+    "/tarefas/{id}/status": {
+      "patch": {
+        "summary": "Atualizar status de uma tarefa",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": { "type": "string", "enum": ["pendente", "em andamento", "concluída"] }
+                },
+                "required": ["status"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Tarefa atualizada" },
+          "404": { "description": "Tarefa não encontrada" }
+        }
+      }
+    },
+    "/tarefas/{id}": {
+      "delete": {
+        "summary": "Remover uma tarefa",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "Tarefa removida" },
+          "404": { "description": "Tarefa não encontrada" }
+        }
+      }
+    }
+  }
+}
