@@ -1,41 +1,76 @@
 body {
-  font-family: Arial, sans-serif;
-  background: #f7f7f7;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
   margin: 0;
   padding: 0;
 }
 .container {
+  overflow-x: auto;
   max-width: 700px;
   margin: 40px auto;
   background: #fff;
   padding: 32px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  transition: box-shadow 0.2s;
+}
+.container:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
 }
 h1 {
   text-align: center;
+  color: #1976d2;
+  margin-bottom: 24px;
+  letter-spacing: 1px;
 }
 .task-form {
   display: flex;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 12px;
   margin-bottom: 24px;
 }
 .task-form input, .task-form select {
-  padding: 8px;
+  padding: 10px;
   font-size: 1rem;
+  border: 1px solid #b0bec5;
+  border-radius: 6px;
+  outline: none;
+  flex: 1 1 180px;
+  transition: border-color 0.2s;
+}
+.task-form input:focus, .task-form select:focus {
+  border-color: #1976d2;
 }
 .task-table {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  overflow-x: auto;
   width: 100%;
   border-collapse: collapse;
   margin-top: 16px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  overflow: hidden;
 }
 .task-table th, .task-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
+  word-break: break-word;
+  max-width: 220px;
+  white-space: normal;
+  border: none;
+  padding: 12px 8px;
   text-align: left;
 }
 .task-table th {
-  background: #f0f0f0;
+  background: #1976d2;
+  color: #fff;
+  font-weight: 500;
+}
+.task-table tr {
+  transition: background 0.2s;
+}
+.task-table tr:hover {
+  background: #e3f2fd;
 }
 .filter {
   margin-bottom: 16px;
@@ -43,14 +78,87 @@ h1 {
   align-items: center;
   gap: 8px;
 }
+.filter label {
+  color: #1976d2;
+  font-weight: 500;
+}
 button {
-  padding: 6px 12px;
-  background: #1976d2;
+  padding: 8px 18px;
+  background: linear-gradient(90deg, #1976d2 60%, #42a5f5 100%);
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+  transition: background 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
 }
 button:hover {
-  background: #1565c0;
+  background: linear-gradient(90deg, #1565c0 60%, #1976d2 100%);
+  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.15);
+@media (max-width: 600px) {
+  .task-table {
+    display: block;
+    overflow-x: auto;
+    width: 100%;
+    white-space: nowrap;
+  }
+  .task-table th, .task-table td {
+    max-width: 120px;
+    word-break: break-word;
+    white-space: normal;
+  }
+  .container {
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin: 0;
+    max-width: 100vw;
+  }
+  h1 {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+  }
+  .task-form {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  .task-form input, .task-form select {
+    font-size: 1.1rem;
+    padding: 12px;
+    width: 100%;
+    min-width: 0;
+  }
+  .filter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-bottom: 12px;
+  }
+  .task-table {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    overflow-x: auto;
+  }
+  .task-table th, .task-table td {
+    max-width: 120px;
+    word-break: break-word;
+    white-space: normal;
+    padding: 10px 4px;
+    font-size: 0.95rem;
+  }
+  button {
+    width: 100%;
+    padding: 14px 0;
+    font-size: 1.1rem;
+    margin-top: 4px;
+    white-space: nowrap;
+}
+}
 }
