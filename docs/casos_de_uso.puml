@@ -1,0 +1,14 @@
+@startuml
+actor Usuario
+actor Sistema
+
+Usuario --> (Login)
+Usuario --> (Criar Tarefa)
+Usuario --> (Listar Tarefas)
+Usuario --> (Atualizar Tarefa)
+Usuario --> (Excluir Tarefa)
+Usuario --> (Logout)
+
+(Sistema) ..> (Autenticar Usuário) : <<include>>
+(Sistema) ..> (Gerenciar Tarefas) : <<include>>
+@enduml

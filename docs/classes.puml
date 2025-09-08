@@ -1,0 +1,18 @@
+@startuml
+class Usuario {
+  +id: int
+  +nome: string
+  +email: string
+  +senha: string
+}
+
+class Tarefa {
+  +id: int
+  +titulo: string
+  +descricao: string
+  +status: string
+  +usuarioId: int
+}
+
+Usuario "1" -- "*" Tarefa : possui >
+@enduml

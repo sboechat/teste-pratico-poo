@@ -1,0 +1,21 @@
+@startuml
+package "Frontend (React)" {
+  [App]
+}
+
+package "Backend (Express)" {
+  [AuthController]
+  [TaskController]
+  [UserRepository]
+  [TaskRepository]
+  [authMiddleware]
+}
+
+[App] --> [AuthController] : login, registro
+[App] --> [TaskController] : CRUD tarefas
+[AuthController] --> [UserRepository]
+[TaskController] --> [TaskRepository]
+[TaskController] --> [authMiddleware]
+
+[Backend (Express)] --> [Banco de Dados (SQLite)]
+@enduml

@@ -1,4 +1,4 @@
-# Gestão de Tarefas
+# Lista de Tarefas
 
 Sistema web para gerenciamento de tarefas, com backend Node.js (Express, SQLite) e frontend React.
 
@@ -26,58 +26,68 @@ O frontend estará disponível em http://localhost:5173
 
 ## Principais Classes e Funções
 
-- **Task**: Modelo de tarefa (`src/models/Task.ts`)
-- **ITaskRepository**: Interface do repositório de tarefas (`src/interfaces/ITaskRepository.ts`)
-- **TaskRepositorySQLite**: Implementação do repositório usando SQLite (`src/repositories/TaskRepositorySQLite.ts`)
-- **TaskService**: Lógica de negócio das tarefas (`src/services/TaskService.ts`)
-- **TaskController**: Controlador das rotas da API (`src/controllers/TaskController.ts`)
+- **Task**: Modelo de tarefa (`src/entity/Task.ts`)
+- **ITaskRepository**: Interface do repositório de tarefas (`src/repository/ITaskRepository.ts`)
+- **TaskRepositorySQLite**: Implementação do repositório usando SQLite (`src/repository/TaskRepositorySQLite.ts`)
+- **TaskService**: Lógica de negócio das tarefas (`src/service/TaskService.ts`)
+- **TaskController**: Controlador das rotas da API (`src/controller/TaskController.ts`)
 - **App**: Componente principal do frontend (`frontend/src/App.tsx`)
+
+## Autenticação
+A API utiliza autenticação JWT. Para acessar as rotas protegidas, envie o token no header:
+
+```
+Authorization: Bearer <seu_token>
+```
+
+Para obter um token, utilize a rota `/api/login`.
 
 ## Exemplos de Uso do CRUD
 
+### Registrar Usuário
+```bash
+curl -X POST http://localhost:3001/api/register \
+  -H "Content-Type: application/json" \
+  -d '{"login": "usuario1", "senha": "123456"}'
+```
+
+### Login
+```bash
+curl -X POST http://localhost:3001/api/login \
+  -H "Content-Type: application/json" \
+  -d '{"login": "usuario1", "senha": "123456"}'
+```
+
 ### Criar Tarefa
 ```bash
-curl -X POST http://localhost:3001/tarefas \
+curl -X POST http://localhost:3001/api/tarefas \
   -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <seu_token>" \
   -d '{"titulo": "Tarefa 1", "descricao": "Primeira tarefa", "status": "pendente"}'
-
-curl -X POST http://localhost:3001/tarefas \
-  -H "Content-Type: application/json" \
-  -d '{"titulo": "Tarefa 2", "descricao": "Segunda tarefa", "status": "em andamento"}'
-
-curl -X POST http://localhost:3001/tarefas \
-  -H "Content-Type: application/json" \
-  -d '{"titulo": "Tarefa 3", "descricao": "Terceira tarefa", "status": "concluída"}'
 ```
 
 ### Listar Tarefas
 ```bash
-curl http://localhost:3001/tarefas
-
-# Listar tarefas filtrando por status concluída
-curl "http://localhost:3001/tarefas/status?status=concluída"
+curl -H "Authorization: Bearer <seu_token>" http://localhost:3001/api/tarefas
 ```
 
 ### Filtrar Tarefas por Status
 ```bash
-curl "http://localhost:3001/tarefas/status?status=pendente"
+curl -H "Authorization: Bearer <seu_token>" "http://localhost:3001/api/tarefas/status?status=pendente"
 ```
 
 ### Atualizar Status de Tarefa
 ```bash
-curl -X PATCH http://localhost:3001/tarefas/{id}/status \
+curl -X PATCH http://localhost:3001/api/tarefas/{id}/status \
   -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <seu_token>" \
   -d '{"status": "concluída"}'
-
-# Atualizar status para em andamento
-curl -X PATCH http://localhost:3001/tarefas/{id}/status \
-  -H "Content-Type: application/json" \
-  -d '{"status": "em andamento"}'
 ```
 
 ### Remover Tarefa
 ```bash
-curl -X DELETE http://localhost:3001/tarefas/{id}
+curl -X DELETE http://localhost:3001/api/tarefas/{id} \
+  -H "Authorization: Bearer <seu_token>"
 ```
 
 ## Documentação da API

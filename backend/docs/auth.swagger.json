@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/login": {
+    "/api/login": {
       "post": {
         "summary": "Login de usuário",
         "requestBody": {
@@ -36,7 +36,7 @@
         }
       }
     },
-    "/register": {
+    "/api/register": {
       "post": {
         "summary": "Cadastro de usuário",
         "requestBody": {

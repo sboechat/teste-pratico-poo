@@ -1,14 +1,27 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "API Gestão de Tarefas",
+    "title": "API Lista de Tarefas",
     "version": "1.0.0",
-    "description": "Documentação da API de gestão de tarefas."
+    "description": "Documentação da API de Lista de Tarefas. Todas as rotas protegidas exigem autenticação JWT via header Authorization: Bearer <token>."
   },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    { "bearerAuth": [] }
+  ],
   "paths": {
-    "/tarefas": {
+    "/api/tarefas": {
       "post": {
         "summary": "Criar uma nova tarefa",
+        "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "required": true,
           "content": {
@@ -27,19 +40,23 @@
         },
         "responses": {
           "201": { "description": "Tarefa criada" },
-          "400": { "description": "Campos obrigatórios ausentes" }
+          "400": { "description": "Campos obrigatórios ausentes" },
+          "401": { "description": "Token ausente ou inválido" }
         }
       },
       "get": {
         "summary": "Listar todas as tarefas",
+        "security": [{ "bearerAuth": [] }],
         "responses": {
-          "200": { "description": "Lista de tarefas" }
+          "200": { "description": "Lista de tarefas" },
+          "401": { "description": "Token ausente ou inválido" }
         }
       }
     },
-    "/tarefas/status": {
+    "/api/tarefas/status": {
       "get": {
         "summary": "Filtrar tarefas por status",
+        "security": [{ "bearerAuth": [] }],
         "parameters": [
           {
             "name": "status",
@@ -50,13 +67,15 @@
         ],
         "responses": {
           "200": { "description": "Lista de tarefas filtradas" },
-          "400": { "description": "Status não informado" }
+          "400": { "description": "Status não informado" },
+          "401": { "description": "Token ausente ou inválido" }
         }
       }
     },
-    "/tarefas/{id}/status": {
+    "/api/tarefas/{id}/status": {
       "patch": {
         "summary": "Atualizar status de uma tarefa",
+        "security": [{ "bearerAuth": [] }],
         "parameters": [
           {
             "name": "id",
@@ -81,13 +100,15 @@
         },
         "responses": {
           "200": { "description": "Tarefa atualizada" },
-          "404": { "description": "Tarefa não encontrada" }
+          "404": { "description": "Tarefa não encontrada" },
+          "401": { "description": "Token ausente ou inválido" }
         }
       }
     },
-    "/tarefas/{id}": {
+    "/api/tarefas/{id}": {
       "delete": {
         "summary": "Remover uma tarefa",
+        "security": [{ "bearerAuth": [] }],
         "parameters": [
           {
             "name": "id",
@@ -98,7 +119,8 @@
         ],
         "responses": {
           "204": { "description": "Tarefa removida" },
-          "404": { "description": "Tarefa não encontrada" }
+          "404": { "description": "Tarefa não encontrada" },
+          "401": { "description": "Token ausente ou inválido" }
         }
       }
     }

@@ -1,0 +1,20 @@
+@startuml
+actor Usuario
+participant Frontend
+participant Backend
+participant BancoDeDados
+
+Usuario -> Frontend: Solicita login
+Frontend -> Backend: POST /api/auth/login
+Backend -> BancoDeDados: Verifica usuário/senha
+BancoDeDados --> Backend: Usuário válido
+Backend -> Frontend: Retorna JWT
+Frontend -> Usuario: Exibe sucesso
+
+Usuario -> Frontend: Cria tarefa
+Frontend -> Backend: POST /api/tasks (com JWT)
+Backend -> BancoDeDados: Salva tarefa
+BancoDeDados --> Backend: Confirmação
+Backend -> Frontend: Retorna tarefa criada
+Frontend -> Usuario: Atualiza lista
+@enduml

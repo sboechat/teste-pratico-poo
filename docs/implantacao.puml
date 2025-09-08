@@ -1,0 +1,10 @@
+@startuml
+@startuml
+node "Frontend (React)" as FE
+node "Backend (Express)" as BE
+database "SQLite" as DB
+
+FE --> BE : HTTP (REST API)
+BE --> DB : SQL
+@enduml
+@enduml
