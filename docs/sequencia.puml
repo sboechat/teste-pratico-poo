@@ -1,4 +1,4 @@
-@startuml
+@startuml sequencia
 actor Usuario
 participant Frontend
 participant Backend

@@ -1,4 +1,4 @@
-@startuml
+@startuml componentes
 package "Frontend (React)" {
   [App]
 }

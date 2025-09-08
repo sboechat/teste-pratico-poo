@@ -1,4 +1,4 @@
-@startuml
+@startuml casos_de_uso
 actor Usuario
 actor Sistema
 
