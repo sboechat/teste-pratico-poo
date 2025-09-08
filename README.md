@@ -39,10 +39,6 @@ O frontend estará disponível em http://localhost:5173
 ```bash
 curl -X POST http://localhost:3001/tarefas \
   -H "Content-Type: application/json" \
-  -d '{"titulo": "Nova tarefa", "descricao": "Descrição da tarefa", "status": "pendente"}'
-
-curl -X POST http://localhost:3001/tarefas \
-  -H "Content-Type: application/json" \
   -d '{"titulo": "Tarefa 1", "descricao": "Primeira tarefa", "status": "pendente"}'
 
 curl -X POST http://localhost:3001/tarefas \
@@ -52,11 +48,6 @@ curl -X POST http://localhost:3001/tarefas \
 curl -X POST http://localhost:3001/tarefas \
   -H "Content-Type: application/json" \
   -d '{"titulo": "Tarefa 3", "descricao": "Terceira tarefa", "status": "concluída"}'
-
-# Criar tarefa com título e descrição longos
-curl -X POST http://localhost:3001/tarefas \
-  -H "Content-Type: application/json" \
-  -d '{"titulo": "Tarefa longa", "descricao": "Descrição detalhada da tarefa com muitos caracteres para testar a responsividade da tabela.", "status": "pendente"}'
 ```
 
 ### Listar Tarefas
