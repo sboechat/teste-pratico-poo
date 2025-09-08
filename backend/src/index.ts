@@ -1,26 +1,25 @@
 import express from 'express';
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
-import { TaskRepositorySQLite } from './repositories/TaskRepositorySQLite';
-import { TaskService } from './services/TaskService';
-import { TaskController } from './controllers/TaskController';
 import swaggerDocument from '../docs/swagger.json';
+import authSwagger from '../docs/auth.swagger.json';
+import authRouter from './router/authRouter';
+import taskRouter from './router/taskRouter';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const repo = new TaskRepositorySQLite();
-const service = new TaskService(repo);
-const controller = new TaskController(service);
+app.use('/api', authRouter);
 
-app.post('/tarefas', (req, res) => controller.criar(req, res));
-app.get('/tarefas', (req, res) => controller.listar(req, res));
-app.get('/tarefas/status', (req, res) => controller.filtrarPorStatus(req, res));
-app.patch('/tarefas/:id/status', (req, res) => controller.atualizarStatus(req, res));
-app.delete('/tarefas/:id', (req, res) => controller.remover(req, res));
+app.use('/api', taskRouter);
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// Unindo docs de autenticação e docs principais
+const mergedSwagger = {
+  ...swaggerDocument,
+  paths: { ...swaggerDocument.paths, ...authSwagger.paths }
+};
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(mergedSwagger));
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
