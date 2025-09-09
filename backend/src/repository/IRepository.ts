@@ -1,6 +1,6 @@
 import { Task } from '../entity/Task';
 
-export interface ITaskRepository {
+export interface IRepository {
   criar(task: Task): Promise<Task>;
   listar(userId: string): Promise<Task[]>;
   filtrarPorStatus(status: string, userId: string): Promise<Task[]>;

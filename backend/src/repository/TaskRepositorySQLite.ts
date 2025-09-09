@@ -1,9 +1,9 @@
 import { db } from '../db/sqlite';
 import { Task } from '../entity/Task';
-import { ITaskRepository } from './ITaskRepository';
+import { IRepository } from './IRepository';
 import { v4 as uuidv4 } from 'uuid';
 
-export class TaskRepositorySQLite implements ITaskRepository {
+export class TaskRepositorySQLite implements IRepository {
   async criar(task: Task): Promise<Task> {
     const id = uuidv4();
     const criadaEm = new Date().toISOString();

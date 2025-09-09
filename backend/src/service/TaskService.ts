@@ -1,9 +1,9 @@
-import { ITaskRepository } from '../repository/ITaskRepository';
+import { IRepository } from '../repository/IRepository';
 import { Task } from '../entity/Task';
 import { CreateTaskDTO } from '../dto/CreateTaskDTO';
 
 export class TaskService {
-  constructor(private repo: ITaskRepository) {}
+  constructor(private repo: IRepository) {}
 
   async criar(dto: CreateTaskDTO): Promise<Task> {
     // Validação básica
